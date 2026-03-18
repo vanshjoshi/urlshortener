@@ -2,22 +2,19 @@
 
 echo "Starting deployment..."
 
-cd /home/ec2-user
-
-# Stop old app (if running)
-pm2 stop all || true
-
-# Remove old code
-rm -rf urlshortener
-
-# (CodeDeploy already copied new files here)
-cd /home/ec2-user/urlshortener
+# Go to app directory
+cd /home/ec2-user/urlshortener || exit
 
 echo "Installing dependencies..."
 npm install
 
-echo "Starting app..."
-pm2 start app.js
+echo "Restarting app..."
+
+# Install pm2 if not exists
+which pm2 || sudo npm install -g pm2
+
+pm2 stop app || true
+pm2 start app.js --name app
 pm2 save
 
-echo "Deployment completed!"
+echo "Deployment successful!"
