@@ -1,19 +1,12 @@
 version: 0.0
 os: linux
 
-file_exists_behavior: OVERWRITE
-
 files:
   - source: /
     destination: /home/ec2-user/urlshortener
 
 hooks:
-  ApplicationStop:
-    - location: scripts/cleanup.sh
-      timeout: 300
-      runas: root
-
   AfterInstall:
     - location: scripts/deploy.sh
       timeout: 300
-      runas: root
+      runas: ec2-user
