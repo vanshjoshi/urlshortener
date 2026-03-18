@@ -11,9 +11,9 @@ hooks:
   ApplicationStop:
     - location: scripts/cleanup.sh
       timeout: 300
-      runas: ec2-user
+      runas: root
 
   AfterInstall:
     - location: scripts/deploy.sh
       timeout: 300
-      runas: ec2-user
+      runas: root
