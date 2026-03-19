@@ -1,6 +1,8 @@
 version: 0.0
 os: linux
 
+file_exists_behavior: OVERWRITE   # 🔥 ADD THIS
+
 files:
   - source: /
     destination: /home/ec2-user/urlshortener
@@ -9,4 +11,4 @@ hooks:
   AfterInstall:
     - location: scripts/deploy.sh
       timeout: 300
-      runas: ec2-user
+      runas: root
