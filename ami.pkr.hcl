@@ -95,7 +95,7 @@ build {
   provisioner "shell" {
     inline = [
       "sudo mkdir -p /home/ec2-user/urlshortener",
-      "sudo chown ec2-user:ec2-user /home/ec2-user/urlshortener"
+      "sudo chown -R ec2-user:ec2-user /home/ec2-user/urlshortener"
     ]
   }
   provisioner "file" {
@@ -122,11 +122,11 @@ build {
       "npm install",
 
       "echo 'Starting app'",
-      "pm2 start app.js",
-      "pm2 save",
+      "sudo -u ec2-user pm2 start app.js",
+      "sudo -u ec2-user pm2 save",
 
       "echo 'Enable PM2 on boot'",
-      "pm2 startup systemd -u ec2-user --hp /home/ec2-user",
+      "sudo env PATH=$PATH:/usr/bin pm2 startup systemd -u ec2-user --hp /home/ec2-user",
 
       "sleep 10",
 
