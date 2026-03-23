@@ -92,6 +92,12 @@ build {
 
   sources = ["source.amazon-ebs.secure_app"]
 
+  provisioner "shell" {
+    inline = [
+      "sudo mkdir -p /home/ec2-user/urlshortener",
+      "sudo chown ec2-user:ec2-user /home/ec2-user/urlshortener"
+    ]
+  }
   provisioner "file" {
     source      = "./"
     destination = "/home/ec2-user/urlshortener"
@@ -109,8 +115,6 @@ build {
 
       "echo 'Installing PM2'",
       "sudo npm install -g pm2",
-
-      "sudo chown -R ec2-user:ec2-user /home/ec2-user/urlshortener",
 
       "cd /home/ec2-user/urlshortener",
 
