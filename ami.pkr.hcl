@@ -93,7 +93,7 @@ build {
   sources = ["source.amazon-ebs.secure_app"]
 
   provisioner "file" {
-    source      = "."
+    source      = "./"
     destination = "/home/ec2-user/urlshortener"
   }
 
