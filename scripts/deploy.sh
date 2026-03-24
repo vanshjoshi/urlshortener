@@ -5,7 +5,7 @@ echo "Starting deployment..."
 cd /home/ec2-user/urlshortener
 
 echo "Installing dependencies..."
-npm install
+npm ci --omit=dev --no-audit
 
 echo "Starting app..."
 pm2 start app.js
